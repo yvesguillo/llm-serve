@@ -6,14 +6,14 @@ services:
     ports:
       - "11434:11434"
     volumes:
-      - ollama_models:/root/.ollama
+      - ./ollama_models:/root/.ollama
     environment:
       - OLLAMA_HOST=0.0.0.0
     healthcheck:
-      test: ["CMD", "curl", "-sf", "http://localhost:11434"]
+      test: ["CMD", "ollama", "list"]
       interval: 10s
       timeout: 5s
-      retries: 10
+      retries: 5
       start_period: 10s
     restart: unless-stopped
 
@@ -21,14 +21,14 @@ services:
     image: ghcr.io/open-webui/open-webui:main
     container_name: openwebui
     ports:
-      - "3000:3000"
+      - "3000:8080"
     depends_on:
       ollama:
         condition: service_healthy
     environment:
       - OLLAMA_API_URL=http://ollama:11434
     volumes:
-      - openwebui_data:/app/backend/data
+      - ./openwebui_data:/app/backend/data
     restart: unless-stopped
 
 volumes:
