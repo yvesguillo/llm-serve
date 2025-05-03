@@ -1,5 +1,4 @@
-# LLM-Serve – Run and Prompt
-**Chat with your local IA**
+# LLM-Serve – Chat with your local IA
 
 ![LLM-Serve](images/llm-serve.avif)
 
