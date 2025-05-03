@@ -1,3 +1,6 @@
 # Docker volumes
 ollama_models/
 openwebui_data/
+
+# Sensitive data
+.env
