@@ -1,8 +1,9 @@
 # LLM-Serve – Run and Prompt
+**Chat with your local IA**
 
 ![LLM-Serve](images/llm-serve.avif)
 
-**A beginner-friendly, ready-to-use local *LLM* server with Open Web UI and Ollama.**
+**A beginner-friendly, ready-to-use local *LLM* Chat server with Open Web UI and Ollama.**
 
 ## Purpose
 
