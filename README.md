@@ -1,6 +1,6 @@
 # LLM-Serve – Run and Prompt
 
-![LLM-Serve](images/llm-serve.png)
+![LLM-Serve](images/llm-serve.avif)
 
 **A beginner-friendly, ready-to-use local *LLM* server with Open Web UI and Ollama.**
 
