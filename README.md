@@ -1,30 +1,31 @@
-# LLM-Serve – Run and Prompt, a beginner-friendly, ready-to-use local LLM server with Open Web UI and Ollama.**
+# LLM-Serve – Run and Prompt
 
 ![LLM-Serve](images/llm-serve.png)
+
+**A beginner-friendly, ready-to-use local *LLM* server with Open Web UI and Ollama.**
 
 ## Purpose
 
 `llm-serve` is a plug-and-play development environment for experimenting with local LLMs using [Ollama](https://ollama.com/) and the excellent [Open Web UI](https://github.com/open-webui/open-webui). It lets you:
 
-- Run a local LLM API (via Ollama)
-- Access a friendly interface to chat (via Open Web UI)
-- Easily switch models
-- Test LLM calls from Python
-- Learn Dockerized dev flows with minimal effort
+- Run a local LLM API (via Ollama).
+- Access a friendly interface to chat (via Open Web UI).
+- Easily switch models.
+- Test LLM calls from Python.
+- Learn Dockerized dev flows with minimal effort.
 
 ## Advantages
 
-- **Self-hosted**: No API keys, no cloud dependency
-- **Modular**: Just two lightweight containers
-- **Beginner-friendly**: Clear folder structure, `.env` file support, and helpful logs
-- **Compatible**: Works in WSL (Ubuntu), native Linux, macOS, and Windows
+- **Self-hosted**: No API keys, no cloud dependency.
+- **Modular**: Just two lightweight containers.
+- **Beginner-friendly**: Clear folder structure, `.env` file support, and helpful logs.
 
 ## Typical Use Cases
 
-- Learn about local LLMs
-- Experiment with open models before committing to OpenAI costs
-- Test prompts and completions via CLI, UI or Python
-- Use in tandem with Crawlect or similar developer tools
+- Learn about local LLMs.
+- Experiment with open models.
+- Test prompts and completions via CLI, UI or Python.
+- Initially built to be used in tandem with [*Crawlect*](https://github.com/yvesguillo/crawlect) or similar developer tools.
 
 ## Getting Started
 
@@ -35,62 +36,37 @@ git clone https://github.com/yvesguillo/llm-serve.git
 cd llm-serve
 ```
 
-### 2. (Optional) WSL Setup
-
-**If using Windows with WSL:**
+### 2. (Optional) if using Windows *WSL*
 
 ```powershell
 wsl -d Ubuntu
 cd /mnt/c/path/to/your/local/repo/llm-serve
 ```
 
-### 3. Configure environment
-
-Edit `.env` or copy from the example:
-
-```bash
-cp .env.example .env
-```
-
-Adjust versions and ports if needed.
-
-## Start the containers
+### 3. Start the containers
 
 ```bash
 docker compose up -d --build
 ```
 
-Check container logs (optional):
-
-```bash
-docker compose logs -f
-```
-
-## Test and Use
-
-### Open Web UI
-
-Visit: [http://localhost:3000](http://localhost:3000)
-
-> *Open WebUi can take several minutes to be reachable upon container initialization. Be patient.*
-
-### Pull Ollama models manually
-You won't be able to use *Ollama* or *Open WebUi* until you loaded some models.  
+### 4. Pull Ollama models manually
+To use *Ollama* or *Open WebUi* you need at least one pulled models.  
 To do so:
 
 ```bash
 docker exec -it ollama bash
 ollama pull dolphin-phi # Or any model you may prefer. dolphin-phi is quite light, capable and perfect for testing.
-ollama pull mistral
 ```
 
-List pulled models:
+### 5. Open Web UI
+Visit: [http://localhost:3000](http://localhost:3000)
 
-```bash
-ollama list
-```
+>⚠️ *Open WebUi can take several minutes to be reachable upon container initialization. Be patient.*
 
-> You may need to **refresh Open Web UI** or **restart it** to detect new models (`docker-compose restart openwebui`).
+> ⚠️ You may need to **refresh Open Web UI** or **restart it** to detect newly pulled models:
+> ```bash
+> docker-compose restart openwebui
+> ```
 
 ## Python Usage Example
 
@@ -142,7 +118,7 @@ docker compose restart
 docker info
 ```
 
-### Monitor usage
+### Monitor usage (`[CTRL] + [C]` to exit)
 
 ```bash
 docker stats -a
@@ -155,19 +131,28 @@ docker ps -a
 docker volume ls
 ```
 
-### Enter container shell
+### Enter container shell (`exit` to… exit)
 
 ```bash
 docker exec -it ollama bash
 ```
 
-### Logs
+### Logs (`[CTRL] + [C]` to exit)
 
 ```bash
 docker compose logs -f openwebui
 ```
 
-## Advanced Cleanup
+## WSL (if using)
+
+### Exit WSL
+
+```bash
+exit
+wsl --shutdown
+```
+
+## Advanced Docker Cleanup
 
 ```bash
 docker stop $(docker ps -aq)
@@ -178,8 +163,5 @@ docker system prune -a --volumes
 
 ## Status
 
-- Stable for dev use
-- Model pulls are *manual* for now
-- PRs welcome!
-
-(Yves Guillo)[https://yvesguillo.ch].
+- Stable for local dev use.
+- Model pulls are *manual* for now.
