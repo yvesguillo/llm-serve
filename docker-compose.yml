@@ -27,7 +27,8 @@ services:
       ollama:
         condition: service_healthy
     environment:
-      - "OLLAMA_API_URL=http://ollama:${OLLAMA_EXPOSED_PORT}"
+      - "OLLAMA_BASE_URL=http://ollama:${OLLAMA_EXPOSED_PORT}"
+      - "WEBUI_SECRET_KEY="
     volumes:
       - ./openwebui_data:/app/backend/data
     restart: unless-stopped
