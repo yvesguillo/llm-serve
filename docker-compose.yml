@@ -1,7 +1,7 @@
 services:
   ollama:
     env_file: .env
-    image: ollama/ollama:0.6.7
+    image: "ollama/ollama:${OLLAMA_VERSION}"
     container_name: ollama
     ports:
       - "${OLLAMA_EXPOSED_PORT}:${OLLAMA_INTERNAL_PORT}"
@@ -19,7 +19,7 @@ services:
 
   openwebui:
     env_file: .env
-    image: ghcr.io/open-webui/open-webui:0.6.5
+    image: "ghcr.io/open-webui/open-webui:${OPENWEBUI_VERSION}"
     container_name: openwebui
     ports:
       - "${OPENWEBUI_EXPOSED_PORT}:${OPENWEBUI_INTERNAL_PORT}"
