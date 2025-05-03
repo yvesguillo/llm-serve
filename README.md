@@ -1,6 +1,6 @@
-# llm-serve
+# LLM-Serve – Run and Prompt, a beginner-friendly, ready-to-use local LLM server with Open Web UI and Ollama.**
 
-**A beginner-friendly, ready-to-use local LLM server with Open Web UI and Ollama.**
+![LLM-Serve](images/llm-serve.png)
 
 ## Purpose
 
@@ -31,7 +31,7 @@
 ### 1. Clone this repo
 
 ```bash
-git clone https://github.com/your-user/llm-serve.git
+git clone https://github.com/yvesguillo/llm-serve.git
 cd llm-serve
 ```
 
@@ -41,7 +41,7 @@ cd llm-serve
 
 ```powershell
 wsl -d Ubuntu
-cd /mnt/c/Users/YOUR_USER/projects/llm-serve
+cd /mnt/c/path/to/your/local/repo/llm-serve
 ```
 
 ### 3. Configure environment
@@ -53,7 +53,6 @@ cp .env.example .env
 ```
 
 Adjust versions and ports if needed.
-
 
 ## Start the containers
 
@@ -71,21 +70,17 @@ docker compose logs -f
 
 ### Open Web UI
 
-Visit:
+Visit: [http://localhost:3000](http://localhost:3000)
 
-```
-http://localhost:3000
-```
-
-> *First load can take up to a minute if models are still initializing.*
+> *Open WebUi can take several minutes to be reachable upon container initialization. Be patient.*
 
 ### Pull Ollama models manually
-
-In a terminal:
+You won't be able to use *Ollama* or *Open WebUi* until you loaded some models.  
+To do so:
 
 ```bash
 docker exec -it ollama bash
-ollama pull dolphin-phi
+ollama pull dolphin-phi # Or any model you may prefer. dolphin-phi is quite light, capable and perfect for testing.
 ollama pull mistral
 ```
 
@@ -95,7 +90,7 @@ List pulled models:
 ollama list
 ```
 
-> You may need to **refresh Open Web UI** or **restart it** to detect new models.
+> You may need to **refresh Open Web UI** or **restart it** to detect new models (`docker-compose restart openwebui`).
 
 ## Python Usage Example
 
@@ -111,12 +106,6 @@ response = client.chat(
 )
 
 print(response['message']['content'])
-```
-
-List installed models:
-
-```python
-print([model['name'] for model in client.list()['models']])
 ```
 
 ## Manage Containers
