@@ -1,8 +1,8 @@
-# LLM-Serve – Chat with your local IA
+# LLM-Serve – Chat with your local AI
 
 ![LLM-Serve](images/llm-serve.avif)
 
-**A beginner-friendly, ready-to-use local *LLM* Chat server with Open Web UI and Ollama.**
+**A beginner-friendly, ready-to-use local *LLM* AI Chat server with *Open WebUi* and *Ollama*.**
 
 ## Purpose
 
