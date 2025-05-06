@@ -72,7 +72,7 @@ To use *Ollama* with *Open WebUI* you need at least one pulled models.
   ollama pull <model-name>
   ```
   Pull any model you may like! E.g.: `ollama pull smollm2:1.7b`.  
-  ***smollm2*** is ultra light (98 MB to 18 GB!), capable and perfect for testing. Small enough to run on a *Raspberry Pi*!
+  ***smollm2*** is ultra light (88MB to 1.8GB!), capable and perfect for testing. Small enough to run on a *Raspberry Pi*!
 
 - **Remove a pulled models** (Optional):
   ```bash
@@ -105,7 +105,7 @@ client = Client(host='http://localhost:11434') # By default, Ollama uses port 11
 response = client.chat(
     model='smollm2:1.7b', # Adapt with any of your pulled models.
     messages=[
-        {"role": "user", "content": "Tell me a fun fact about Montres Jaquet Droz."}
+        {"role": "user", "content": "I'm happy to chat with you! Can you tell me something fun you know about?"}
     ]
 )
 
