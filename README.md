@@ -1,177 +1,170 @@
-# LLM-Serve – Chat with your local AI
+# LLM-Serve – Chat Locally with Your AI Sidekick
 
 ![LLM-Serve](images/llm-serve.avif)
 
-**A beginner-friendly, ready-to-use local *LLM* AI Chat server runing *Open WebUI* and *Ollama*.**
+**Fire up your own local AI chat server in minutes – powered by [Ollama](https://ollama.com/) + [Open WebUI](https://github.com/open-webui/open-webui)**
 
-## Purpose
+`llm-serve` is a beginner-friendly, zero-API-keys-required playground for local LLMs. It sets up a private, Dockerized environment where you can:
 
-`llm-serve` is a plug-and-play development environment for experimenting with local *LLMs* using the both excellent [*Ollama*](https://ollama.com/) and [*Open Web UI*](https://github.com/open-webui/open-webui).  
-It lets you:
+- Run a local AI model (via Ollama)
+- Chat with it through a sleek web interface (Open WebUI)
+- Switch models like socks
+- Test your prompts with Python
+- Learn real-world Docker dev flows with no stress
 
-- Run a local LLM API (via Ollama).
-- Access a friendly interface to chat (via Open Web UI).
-- Easily switch models.
-- Test LLM calls from Python.
-- Learn Dockerized dev flows with minimal effort.
+## Why LLM-Serve?
 
-## Advantages
+- **No API keys. No cloud. No limits.** Just you and your local LLMs.
+- **Runs anywhere.** Your laptop, dev server, or even a Raspberry Pi.
+- **Super lightweight.** Just two containers: Ollama and Open WebUI.
+- **Totally beginner-friendly.** Clean structure, `.env` support, clear logs, and cheat sheets galore.
 
-- **Self-hosted**: No internet conection or cloud dependency (once installed) and no API keys needed.
-- **Modular**: Just two lightweight containers.
-- **Beginner-friendly**: Clear folder structure, `.env` file support, and helpful logs.
+## Use Cases
 
-## Typical Use Cases
-
-- Learn about local LLMs.
-- Experiment with open models.
-- Test prompts and completions via CLI, UI or Python.
-- Initially built to be used in tandem with [*Crawlect*](https://github.com/yvesguillo/crawlect) or similar developer tools.
+- Experiment with open-source LLMs offline.
+- Explore local inference performance.
+- Build LLM tools, agents, or workflows.
+- Use it with [Crawlect](https://github.com/yvesguillo/crawlect) or similar dev projects.
+- Just… play with cool AI stuff!
 
 ## Getting Started
 
-### 1. Clone this repo
+### 1. Clone the repo
 
 ```bash
 git clone https://github.com/yvesguillo/llm-serve.git
 cd llm-serve
 ```
 
-### 2. If using Windows *WSL* (Optional) 
-Check [How to install Linux on Windows with WSL](https://learn.microsoft.com/en-us/windows/wsl/install) for more details.  
-Alternatively, you can install [*Docker Desktop*](https://www.docker.com/products/docker-desktop/).
+### 2. On Windows? Using **WSL**? Great! (Optional)
 
 ```powershell
 wsl -d Ubuntu
-cd /mnt/c/path/to/your/local/repo/llm-serve
+cd /mnt/c/path/to/llm-serve
 ```
 
-### 3. Start the containers
+Or skip WSL and just use [Docker Desktop](https://www.docker.com/products/docker-desktop). Your choice.
+
+### 3. Launch it
 
 ```bash
 docker compose up -d --build
 ```
 
-### 4. Pull Ollama models manually
-To use *Ollama* with *Open WebUI* you need at least one pulled models.  
-*This project does not include any*.
+This spins up (`--build`) both containers in the background (`-b`).
 
-- **Enter *Ollama* container and launch the bash**:
+### 4. Pull your first model manually
+
+This project doesn’t include any models by default. You’ll need to pull one using `ollama`.
+
+- Enter the Ollama container:
+
   ```bash
   docker exec -it ollama bash
   ```
 
-- **List pulled models** (Optional):
+- Pull a model (example: a tiny but mighty one):
+
+  ```bash
+  ollama pull smollm2:1.7b
+  ```
+
+  `smollm2` is fast, small (88MB to 1.8GB!), and even runs on a Raspberry Pi. Perfect for testing.
+
+- Check what you’ve got (optional):
+
   ```bash
   ollama list
   ```
-  Purely informative, you can skip it if you already know what you have pulled. On first launch and since this project does not include models, this will return an empty list.
 
-- **Pull a model**:
-  ```bash
-  ollama pull <model-name>
-  ```
-  Pull any model you may like! E.g.: `ollama pull smollm2:1.7b`.  
-  ***smollm2*** is ultra light (88MB to 1.8GB!), capable and perfect for testing. Small enough to run on a *Raspberry Pi*!
+- Clean up the attic (optional):
 
-- **Remove a pulled models** (Optional):
-  ```bash
-  ollama rm  <model-name>
-  ```
-
-- **Clean up unused data** (Optional):
   ```bash
   ollama prune
   ```
-  This removes unused models and temporary build and cache files. It might be a good idea to use it time to time, especially if *Ollama* runs without restart during a long period of time.
 
+  Removes unused models and temp junk.
 
-### 5. Open Web UI
-Visit: [http://localhost:3000](http://localhost:3000)
+### 5. Open the UI 🎛️
 
->⚠️ *Open WebUI may not be reachable for several minutes upon container initialization. Be patient.*
+Fire up your browser and head to:
 
-> ⚠️ You may need to **refresh Open WebUI** or **restart it** to detect newly pulled models, but usually **hard refreshing the browser** (`[CTRL]` + `[F5]`) do the trick:
-> ```bash
-> docker-compose restart openwebui
-> ```
+[http://localhost:3000](http://localhost:3000)
 
-## Python Usage Example
+> ⚠️ *Open WebUI might take a minute or two to boot up. Be patient!*
+
+If your newly pulled models aren’t showing up:
+
+- Try a hard refresh *Open WebUI* page: `CTRL + F5`
+- Or restart the UI service:
+
+  ```bash
+  docker compose restart openwebui
+  ```
+
+## Python Integration
+
+Test your local LLM directly from Python:
 
 ```python
 from ollama import Client
-client = Client(host='http://localhost:11434') # By default, Ollama uses port 11434 so does LLM-Serve. Check the .env file.
+client = Client(host='http://localhost:11434')
 
 response = client.chat(
-    model='smollm2:1.7b', # Adapt with any of your pulled models.
+    model='smollm2:1.7b',
     messages=[
-        {"role": "user", "content": "I'm happy to chat with you! Can you tell me something fun you know about?"}
+        {"role": "user", "content": "Hello there! Got a fun fact for me?"}
     ]
 )
 
 print(response['message']['content'])
 ```
 
-## Manage Containers
+## Docker Quick Commands
 
-### Stop
-
-```bash
-docker compose stop
-```
-
-### Stop & remove containers
+### Start, stop, and restart containers
 
 ```bash
-docker compose down
+docker compose stop       # Pause
+docker compose down       # Stop & remove
+docker compose down -v    # Also nuke volumes
+docker compose restart    # Refresh like a pro
 ```
 
-### Wipe volumes too
+## Cheat Sheet: Docker Power Moves
 
-```bash
-docker compose down -v
-```
-
-### Restart
-
-```bash
-docker compose restart
-```
-
-## Docker Toolbox
-
-### System info
+### System Info
 
 ```bash
 docker info
 ```
 
-### Monitor usage (`[CTRL]` + `[C]` to exit)
+### Real-time usage dashboard
 
 ```bash
 docker stats -a
 ```
 
-### Inspect containers & volumes
+### Containers & volumes
 
 ```bash
 docker ps -a
 docker volume ls
 ```
 
-### Enter container shell (`exit` to… exit)
+### Shell access (to any container)
 
 ```bash
 docker exec -it <container-name> bash
 ```
 
-### Display logs (`[CTRL]` + `[C]` to exit)
+### Logs, logs, logs
 
 ```bash
 docker compose logs -f <container-name>
 ```
 
-## WSL (if using)
+## Bonus: WSL Tips (if you're using it)
 
 ### Exit WSL
 
@@ -180,7 +173,9 @@ exit
 wsl --shutdown
 ```
 
-## Docker radical Cleanup
+## Nuclear Option (Cleanup All the Things)
+
+Use at your own risk. This wipes containers, images, volumes — everything.
 
 ```bash
 docker stop $(docker ps -aq)
@@ -189,8 +184,13 @@ docker rmi $(docker images -aq)
 docker system prune -a --volumes
 ```
 
-## Status
+## Project Status
 
-- Stable for local dev use.
-- Model pulls are *manual* for now.  
-  Considering implementing a custom UI container for *Ollam* to automatically pull a set of default or user-defined models on startup, as well as offering the standard *Ollama* command interface.
+- Solid and stable for local LLM tinkering
+- Model pulls are still manual for now
+
+## Roadmap & Crazy Ideas
+
+- Future plans: add a custom UI container to preload models and expose Ollama’s CLI via web
+
+Got ideas? Spot a bug? Wanna make this thing even cooler? Open an issue or shoot a PR — we’d love to hear from you!
