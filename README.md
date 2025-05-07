@@ -51,7 +51,7 @@ Or skip WSL and just use [Docker Desktop](https://www.docker.com/products/docker
 docker compose up -d --build
 ```
 
-This spins up (`--build`) both containers in the background (`-b`).
+This spins up (`--build`) both containers in the background (`-d`).
 
 ### 4. Pull your first model manually
 
@@ -85,7 +85,7 @@ This project doesn’t include any models by default. You’ll need to pull one 
 
   Removes unused models and temp junk.
 
-### 5. Open the UI 🎛️
+### 5. Open the UI
 
 Fire up your browser and head to:
 
@@ -131,7 +131,7 @@ docker compose down -v    # Also nuke volumes
 docker compose restart    # Refresh like a pro
 ```
 
-## Cheat Sheet: Docker Power Moves
+## Docker Cheat Sheet
 
 ### System Info
 
@@ -158,22 +158,13 @@ docker volume ls
 docker exec -it <container-name> bash
 ```
 
-### Logs, logs, logs
+### Logs
 
 ```bash
 docker compose logs -f <container-name>
 ```
 
-## Bonus: WSL Tips (if you're using it)
-
-### Exit WSL
-
-```bash
-exit
-wsl --shutdown
-```
-
-## Nuclear Option (Cleanup All the Things)
+### Nuclear Option (Cleanup All the Things)
 
 Use at your own risk. This wipes containers, images, volumes — everything.
 
@@ -184,6 +175,13 @@ docker rmi $(docker images -aq)
 docker system prune -a --volumes
 ```
 
+## Exit WSL (if you're using it)
+
+```bash
+exit
+wsl --shutdown
+```
+
 ## Project Status
 
 - Solid and stable for local LLM tinkering
@@ -191,6 +189,7 @@ docker system prune -a --volumes
 
 ## Roadmap & Crazy Ideas
 
-- Future plans: add a custom UI container to preload models and expose Ollama’s CLI via web
+- Add a custom UI container to preload models and expose Ollama’s CLI via web
+- Make it safe for remote use
 
 Got ideas? Spot a bug? Wanna make this thing even cooler? Open an issue or shoot a PR — we’d love to hear from you!
