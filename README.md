@@ -139,7 +139,7 @@ docker compose restart    # Refresh like a pro
 docker info
 ```
 
-### Real-time usage dashboard
+### Real-time usage dashboard (`CTRL + C` to exit)
 
 ```bash
 docker stats -a
@@ -152,16 +152,23 @@ docker ps -a
 docker volume ls
 ```
 
-### Shell access (to any container)
+### Shell access (to any container, `exit` to… exit the bash)
 
 ```bash
 docker exec -it <container-name> bash
 ```
 
-### Logs
+### Logs (`CTRL + C` to exit, without `-f` for a snapshot)
 
 ```bash
 docker compose logs -f <container-name>
+```
+
+### Tidy up a bit
+```bash
+docker image prune -f             # Removes dangling images
+docker builder prune -f           # Cleans build cache
+docker system prune -f --volumes  # Removes unused containers/networks/images/volumes
 ```
 
 ### Nuclear Option (Cleanup All the Things)
@@ -169,17 +176,17 @@ docker compose logs -f <container-name>
 Use at your own risk. This wipes containers, images, volumes — everything.
 
 ```bash
-docker stop $(docker ps -aq)
-docker rm -f $(docker ps -aq)
-docker rmi $(docker images -aq)
-docker system prune -a --volumes
+docker stop $(docker ps -aq)      # Stop all running containers
+docker rm -f $(docker ps -aq)     # Stop and remove at once
+docker rmi $(docker images -aq)   # Remove all images
+docker system prune -a --volumes  # Prune all at once
 ```
 
 ## Exit WSL (if you're using it)
 
 ```bash
-exit
-wsl --shutdown
+exit              # Exits WSL console
+wsl --shutdown    # Switch it off
 ```
 
 ## Project Status
