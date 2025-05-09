@@ -1,4 +1,6 @@
-# LLM-Serve – Chat Locally with Your AI Sidekick
+# LLM-Serve
+
+**Chat Locally with Your AI Sidekick.**
 
 ![LLM-Serve](images/llm-serve.avif)
 
