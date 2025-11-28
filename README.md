@@ -190,7 +190,7 @@ docker compose logs -f <container-name>
 
 ### Nuclear Option (Cleanup All the Things)
 
-Use at your own risk. This wipes containers, images, volumes — everything.
+Use at your own risk. This wipes containers, images, volumes; everything.
 
 ```bash
 docker stop $(docker ps -aq)
@@ -216,4 +216,4 @@ wsl --shutdown
 - Add a custom UI container to preload models and expose Ollama’s CLI via web
 - Make it safe for remote use
 
-Got ideas? Spot a bug? Wanna make this thing even cooler? Open an issue or shoot a PR — we’d love to hear from you!
+Got ideas? Spot a bug? Wanna make this thing even cooler? Open an issue or shoot a PR; we’d love to hear from you!
