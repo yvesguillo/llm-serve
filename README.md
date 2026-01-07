@@ -217,3 +217,6 @@ wsl --shutdown
 - Make it safe for remote use
 
 Got ideas? Spot a bug? Wanna make this thing even cooler? Open an issue or shoot a PR; we’d love to hear from you!
+
+If you find LLM-Serve useful, **give it a ☆** to support the project!  
+[![GitHub Repo stars](https://img.shields.io/github/stars/yvesguillo/llm-serve?style=social)](#)
